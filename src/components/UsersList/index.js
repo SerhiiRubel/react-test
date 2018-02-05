@@ -3,6 +3,7 @@ import ItemUser from '../../components/ItemUser';
 export default (props) => {
   const  {
     data,
+    displayedUsers,
   } = props;
   return (
     <div className='usersList'>
