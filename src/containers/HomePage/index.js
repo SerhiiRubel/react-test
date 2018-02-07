@@ -38,6 +38,7 @@ class HomePage extends Component {
 
   updateApp(config) {
     if(config.activeUser === this.state.activeUser.id) {
+      console.log(this.state.activeUser.id);
       this.setState ({
         isRepeat: true,
       })
@@ -57,18 +58,20 @@ class HomePage extends Component {
   }
 
   searchName (e) {
-        console.log(document.querySelector('.form-control') === e.target);
+        // console.log(document.querySelector('.form-control') === e.target);
         var searchQuery = e.target.value.toLowerCase();
         var displayedUsers = this.state.displayedUsers.filter( el =>
           {
             var searchValue = el.name.toLowerCase();
             return searchValue.indexOf(searchQuery) !== -1
           });
+        // if (displayedUsers == 0) {
+        //   alert("Soryan' bratan");
+        // }
       this.setState({
         data: displayedUsers
       })
   }
-
 
   render() {
     return (

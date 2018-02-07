@@ -5,7 +5,6 @@ export default (props) => {
   return (
     <div className='itemUser' onClick={() => props.updateApp({
       activeUser: props.id,
-      // activeUser: 10
     })}>
       <div className="itemUser__image">
         {props.image}
