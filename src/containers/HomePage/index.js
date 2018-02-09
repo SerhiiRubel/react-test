@@ -90,8 +90,6 @@ class HomePage extends Component {
       this.updateApp({ 
         currentPage: Math.round(number) - 1,
        })
-      console.log(number + 2 >= Math.ceil(this.state.data.length / 15) );
-      console.log(number + 2 >= Math.ceil(this.state.data.length / 15));
     } else {
       const current = this.state.currentPage;
       if(current + number >= 0 && current + number < Math.ceil(this.state.data.length  / 15)) {
@@ -102,7 +100,7 @@ class HomePage extends Component {
     );
       }
     }
-    this. hideNumberPage();
+    this.hideNumberPage();
   }
 
   hideNumberPage = () => {
@@ -116,8 +114,18 @@ class HomePage extends Component {
 
   hidePagination = filter => filter.length < 15 ? this.updateApp ({ isHidePagination:true }) : this.updateApp({ isHidePagination:false })
 
-  splitUsers = () =>  this.state.data && this.state.data.slice(this.state.currentPage * 15, this.state.currentPage * 15 + 15)
+  splitUsers = () => this.state.data && this.state.data.slice(this.state.currentPage * 15, this.state.currentPage * 15 + 15)
   
+  // sort = type => {
+  //   const data = this.state.data;
+  //   const sorted = data.sort((a,b) => {
+  //     return a[type] > b[type] ? 1 : -1;
+  //   });
+  //   this.updateApp({
+  //     data:sorted,
+  //   })
+  // } 
+
   render() {
     return (
       <div className='home'>
@@ -126,11 +134,25 @@ class HomePage extends Component {
             searchValue={this.search.bind(this)}
             isError={this.state.errorSearch}
           />
+        {/* <div className='rowSorting'>
+          <button 
+            className='btn btn-primary'
+            onClick={this.sort('name')}
+          >
+            <p>Name</p>
+          </button>
+          <button
+            className='btn btn-primary'
+            onClick={this.sort('age')}
+          >
+            <p>Name</p>
+          </button>
+        </div> */}
         </div>
         <div className="home__content">
           <div className="home__sidebar">
             <ActiveUser
-              activeUser={ this.state.activeUser }
+              activeUser={this.state.activeUser}
             />
             {
               this.state.errorMessage &&
@@ -144,15 +166,15 @@ class HomePage extends Component {
               <h2 className='usersHeader__title'>Users</h2>
             </div>
             <UsersList
-              data={ this.splitUsers() }
+              data={this.splitUsers()}
               handlePagination={this.handlePagination}
               updateApp={this.updateApp.bind(this)}
-              isHidePagination = { this.state.isHidePagination }
-              currentPage = { this.state.currentPage }
-              isDisabledLB = { this.state.isDisabledLB }
-              isDisabledRB = { this.state.isDisabledRB }
-              isDisNumPage = { this.state.isDisNumPage }
-              isDisNum = { this.state.isDisNum }
+              isHidePagination={this.state.isHidePagination}
+              currentPage={this.state.currentPage}
+              isDisabledLB={this.state.isDisabledLB}
+              isDisabledRB={this.state.isDisabledRB}
+              isDisNumPage={this.state.isDisNumPage}
+              isDisNum={this.state.isDisNum}
             />
           </div>
         </div>
