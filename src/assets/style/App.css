@@ -10,11 +10,18 @@
   .home__header {
     padding: 15px;
     min-height: 50px; }
+    .home__header .input-group {
+      display: flex;
+      flex-direction: column; }
     .home__header .form-control {
+      width: 100%;
+      margin-bottom: 10px;
       outline: none; }
       .home__header .form-control:focus, .home__header .form-control:active {
         border: 1px solid #ced4da;
         box-shadow: none; }
+      .home__header .form-control.is-invalid {
+        border-color: #dc3545 !important; }
   .home__content {
     display: flex;
     flex: 1;
@@ -22,7 +29,7 @@
   .home__sidebar {
     margin-right: 15px;
     width: 25%;
-    paddding: 15px;
+    padding: 15px;
     border: 1px solid #eaeaea;
     border-radius: 3px; }
   .home__wrapUsers {
@@ -35,10 +42,17 @@
         font-weight: bold;
         font-size: 20px; }
     .home__wrapUsers .itemUser {
-      display: flex; }
+      display: flex;
+      align-items: center; }
       .home__wrapUsers .itemUser > div {
         padding: 8px;
         flex: 1; }
+      .home__wrapUsers .itemUser__image {
+        flex: inherit !important;
+        width: 100px; }
+        .home__wrapUsers .itemUser__image img {
+          width: 60px;
+          height: 60px; }
     .home__wrapUsers .usersList__head {
       display: flex;
       background: #eaeaea; }
@@ -49,6 +63,24 @@
       .home__wrapUsers .usersList__head > div {
         padding: 8px;
         flex: 1; }
+      .home__wrapUsers .usersList__head .avatar {
+        width: 100px;
+        flex: inherit !important; }
+
+.activeUser {
+  padding: 10px;
+  text-align: center; }
+  .activeUser__image {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eaeaea; }
+    .activeUser__image img {
+      max-width: 100%;
+      width: 150px;
+      height: 150px; }
+  .activeUser__text {
+    margin: 0;
+    padding: 8px;
+    border-bottom: 1px solid #eaeaea; }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -88,3 +120,6 @@
     transform: rotate(0deg); }
   to {
     transform: rotate(360deg); } }
+
+.pagination {
+  justify-content: center; }

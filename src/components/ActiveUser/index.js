@@ -1,24 +1,29 @@
 import React from 'react';
 
 export default  (props) => {
-  const user = props.activeUser;
+  const user = props.activeUser ? props.activeUser : '';
+  // console.log(props.activeUser);
+  // console.log(user);
   return (
     <div className="activeUser">
-      <div>
-        {user.name}
+      <div className='activeUser__image'>
+        <img src={user.image} alt=""/>
       </div>
-      <div>
+      {
+        user.name &&
+        <p className='activeUser__text'>
+          {user.name}
+        </p>
+      }
+      <p className='activeUser__text'>
         {user.age}
-      </div>
-      <div>
+      </p>
+      <p className='activeUser__text'>
         {user.phone}
-      </div>
-      <div> { user.image } </div>
-      <div>
-        { props.isRepeat &&
-          <p> Выберите другого пользователя! </p>
-        }
-      </div>
+      </p>
+      <p className='activeUser__text'>
+        {user.name}
+      </p>
     </div>
   );
 }
