@@ -20,10 +20,10 @@ class HomePage extends Component {
       activeNumber: 0,
       currentPage: 0,
       isHidePagination: false,
-      isDisabledRB: false,
-      isDisabledLB: true,
-      isDisNumPage: false,
-      isDisNum:false,
+      isDisabledRB: false, // правая кнопка
+      isDisabledLB: true, // левая кнопка
+      isDisNumPage: false, // последняя цыфра
+      isDisNum:false, // предпоследняя цыфра
     };
   }
 
@@ -46,11 +46,11 @@ class HomePage extends Component {
   }
 
   updateApp(config) {
-    const users = this.state.data;
     this.setState(config);
+
     if (config.activeUser) {
       if (config.activeUser.id === this.state.activeUser.id) {
-        this.setState({
+          this.setState({
           errorMessage: true,
         })
       } else {
@@ -86,45 +86,54 @@ class HomePage extends Component {
   }
 
   handlePagination = (number) => {
+    // e.preventDefault();
+    const current = this.state.currentPage;
     if(number > 1 && number <= Math.ceil(this.state.data.length / 15)) {
       this.updateApp({ 
         currentPage: Math.round(number) - 1,
        })
+    this.hideNumberPage (number - 1);
     } else {
-      const current = this.state.currentPage;
       if(current + number >= 0 && current + number < Math.ceil(this.state.data.length  / 15)) {
         this.updateApp(prev => ({
           currentPage: prev.currentPage + number,
         }
-      )
-    );
-      }
+      ));
+    this.hideNumberPage(current + number);    
+  }
     }
-    this.hideNumberPage();
   }
 
-  hideNumberPage = () => {
+  hideNumberPage = (prev) => {
+    console.log(prev);
     // проверка на прев и некст
-    this.state.currentPage < 1  ? this.updateApp({ isDisabledLB: true }) : this.updateApp({ isDisabledLB: false });
-    this.state.currentPage >= Math.ceil(this.state.data.length / 15) - 1 ? this.updateApp ({ isDisabledRB: true }) : this.updateApp({isDisabledRB: false});
+    prev < 1  ? this.updateApp({ isDisabledLB: true }) : this.updateApp({ isDisabledLB: false });
+    prev + 1 == Math.ceil(this.state.data.length / 15) ? this.updateApp ({ isDisabledRB: true }) : this.updateApp({isDisabledRB: false});
     // проверка на намбер
-    this.state.currentPage >= Math.ceil(this.state.data.length / 15) ? this.updateApp({ isDisNumPage: true, }) : this.updateApp({isDisNumPage: false,});
-    this.state.currentPage + 1 >= Math.ceil(this.state.data.length / 15) ? this.updateApp({ isDisNum: true, }) : this.updateApp({isDisNum: false,});
+    prev + 1 >= Math.ceil(this.state.data.length / 15) ? this.updateApp({ isDisNumPage: true, }) : this.updateApp({isDisNumPage: false,});
+    prev + 2 >= Math.ceil(this.state.data.length / 15) ? this.updateApp({ isDisNum: true, }) : this.updateApp({isDisNum: false,});
   }
 
-  hidePagination = filter => filter.length < 15 ? this.updateApp ({ isHidePagination:true }) : this.updateApp({ isHidePagination:false })
+  hidePagination = fillter => fillter.length < 15 ? this.updateApp({ isHidePagination: true, }) : this.updateApp({ isHidePagination: false, })
 
-  splitUsers = () => this.state.data && this.state.data.slice(this.state.currentPage * 15, this.state.currentPage * 15 + 15)
-  
-  // sort = type => {
-  //   const data = this.state.data;
-  //   const sorted = data.sort((a,b) => {
-  //     return a[type] > b[type] ? 1 : -1;
-  //   });
-  //   this.updateApp({
-  //     data:sorted,
-  //   })
-  // } 
+  splitUsers = () =>  this.state.data && this.state.data.slice(this.state.currentPage * 15, this.state.currentPage * 15 + 15)
+
+  sort = (type) => {
+    const data = this.state.data;
+    const sorted = data.sort((a, b) => {
+      return a[type] > b[type] ? 1 : -1;
+    });
+    this.updateApp({
+      data: sorted,
+    })
+  }
+
+  reset = () => {
+    this.updateApp({
+      data: this.initialData,
+      activeUser: this.state.data[0],
+    });
+  }
 
   render() {
     return (
@@ -134,20 +143,32 @@ class HomePage extends Component {
             searchValue={this.search.bind(this)}
             isError={this.state.errorSearch}
           />
-        {/* <div className='rowSorting'>
-          <button 
-            className='btn btn-primary'
-            onClick={this.sort('name')}
-          >
-            <p>Name</p>
-          </button>
-          <button
-            className='btn btn-primary'
-            onClick={this.sort('age')}
-          >
-            <p>Name</p>
-          </button>
-        </div> */}
+          <div className='rowSorting'>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onClick={() => this.sort('name')}
+            >
+                <i class="fa fa-users"></i>
+                <p className='btnName'>Name</p>
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onClick={() => this.sort('age')}
+            >
+              <i class="fa fa-sort-amount-desc"></i>
+              <p className='btnName'>Age</p>
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              onClick={() => this.reset()}
+            >
+              <i class="fa fa-ban"></i>
+              <p className='btnName'>Reset</p>
+            </button>
+          </div>
         </div>
         <div className="home__content">
           <div className="home__sidebar">

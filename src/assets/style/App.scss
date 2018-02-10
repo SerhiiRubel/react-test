@@ -87,7 +87,26 @@
     }
   }
 }
+.rowSorting {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  .btn {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    &:first-child {
+      margin-left: 0px;
+    }
+    .btnName {
+      margin: 0 0 0 5px;
 
+    }
+    &:last-child {
+      margin-left: 15px;
+    }
+  }
+}
 .activeUser  {
   padding: 10px;
   text-align: center;
@@ -152,4 +171,16 @@
 
 .pagination {
   justify-content: center;
+}
+
+.dropdown {
+  &__head {
+    padding: 15px;
+    min-height: 42px;
+    border-radius: 5px;
+    border: 1px solid #eaeaea;
+  }
+  &__content {
+    padding: 10px;
+  }
 }

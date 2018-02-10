@@ -25,7 +25,7 @@ export default (props) => {
         data && data.length > 0 &&
         data.map((item, index) =>
         <ItemUser
-          key={index}
+          key={ item.id }
           updateApp={props.updateApp}
           {...item}
         />)
@@ -47,8 +47,8 @@ export default (props) => {
                 {props.currentPage + 1}
               </a>
             </li>
-            <li className="page-item" className = { props.isDisNumPage ? 'disabled page-item' : 'page-item' }>
-              <a className="page-link" href="#" onClick = { () => props.handlePagination(props.currentPage + 2) }>
+            <li className={ props.isDisNumPage ? 'disabled page-item' : 'page-item' }>
+              <a className="page-link" href="#" onClick={() => props.handlePagination(props.currentPage + 2)}>
                 {props.currentPage + 2}
               </a>
             </li>
