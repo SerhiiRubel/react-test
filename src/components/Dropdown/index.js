@@ -1,6 +1,12 @@
 import React from 'react';
 
 export default props => {
+  const {
+    name,
+    phone,
+    username,
+    website,
+  } = props;
   return (
     <div className='dropdown'>
       <button
@@ -12,7 +18,10 @@ export default props => {
       {
         props.isOpenDropdown.includes(props.id) &&
         <div className='dropdown__content'>
-          DropdownContent
+          <p className='dropdown__user'>{name}</p>
+          <p className='dropdown__user'>{phone}</p>
+          <p className='dropdown__user'>{username}</p>
+          <p className='dropdown__user'>{website}</p>
         </div>
       }
     </div>

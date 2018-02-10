@@ -130,7 +130,7 @@ class HomePage extends Component {
 
   reset = () => {
     this.updateApp({
-      data: this.initialData,
+      data: Array.from(this.initialData),
       activeUser: this.state.data[0],
     });
   }

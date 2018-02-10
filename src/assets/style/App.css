@@ -109,6 +109,7 @@
   background-color: #222;
   height: 150px;
   padding: 20px;
+  margin-bottom: 30px;
   color: white;
   display: flex;
   align-items: center;
@@ -139,11 +140,22 @@
 .pagination {
   justify-content: center; }
 
-.dropdown__head {
-  padding: 15px;
-  min-height: 42px;
-  border-radius: 5px;
-  border: 1px solid #eaeaea; }
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .dropdown:not(:last-child) {
+    margin-bottom: 10px; }
+  .dropdown__head {
+    background-color: yellowgreen;
+    width: 50%;
+    padding: 15px;
+    min-height: 42px;
+    border-radius: 5px;
+    border: 1px solid #eaeaea; }
+  .dropdown__content {
+    padding: 10px; }
 
-.dropdown__content {
-  padding: 10px; }
+.about__header h1 {
+  text-align: center;
+  margin-bottom: 30px; }

@@ -43,17 +43,29 @@ export default (props) => {
               </a>
             </li>
             <li className="page-item active" >
-              <a className="page-link" href="#" onClick ={ () => props.handlePagination(props.currentPage + 1.1) }>
+              <a 
+                className="page-link" 
+                href="#" 
+                onClick={() => props.handlePagination(props.currentPage + 1.1)}
+              >
                 {props.currentPage + 1}
               </a>
             </li>
             <li className={ props.isDisNumPage ? 'disabled page-item' : 'page-item' }>
-              <a className="page-link" href="#" onClick={() => props.handlePagination(props.currentPage + 2)}>
+              <a 
+                className="page-link" 
+                href="#" 
+                onClick={() => props.handlePagination(props.currentPage + 2)}
+              >
                 {props.currentPage + 2}
               </a>
             </li>
             <li className="page-item" className = { props.isDisNum ? 'disabled page-item' : 'page-item' }>
-              <a className="page-link" href="#" onClick = { () => props.handlePagination(props.currentPage + 3) }>
+              <a 
+                className="page-link" 
+                href="#" 
+                onClick = { () => props.handlePagination(props.currentPage + 3) }
+              >
                 {props.currentPage + 3}
               </a>
             </li>
